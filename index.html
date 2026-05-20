@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property Listings — Bali Home Immo Integration Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  :root {
+    --navy:    #0d1f2d;
+    --forest:  #1a3328;
+    --gold:    #b8955a;
+    --gold-lt: #d4b07a;
+    --cream:   #f5f0e8;
+    --sand:    #e8dfc8;
+    --white:   #fdfcf9;
+    --muted:   #6b7280;
+    --border:  #ddd5c0;
+    --tag-bg:  #f0e9d8;
+  }
+ 
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+ 
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+ 
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+ 
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+ 
+  .logo-mark svg { display: block; }
+ 
+  .logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+  }
+ 
+  .logo-text span { color: var(--gold); }
+ 
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+ 
+  nav a {
+    color: rgba(245,240,232,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+ 
+  nav a:hover { color: var(--gold-lt); }
+ 
+  .badge-demo {
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+ 
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    padding: 5rem 2.5rem 4rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(184,149,90,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 120%, rgba(184,149,90,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+ 
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+ 
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+ 
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    margin-bottom: 1rem;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+ 
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-lt);
+  }
+ 
+  .hero-sub {
+    color: rgba(245,240,232,0.55);
+    font-size: 14px;
+    max-width: 460px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+ 
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+  }
+ 
+  .hero-stat {
+    text-align: center;
+  }
+ 
+  .hero-stat .number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gold-lt);
+    display: block;
+  }
+ 
+  .hero-stat .label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+  }
+ 
+  /* ── SECTION HEADER ── */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 3rem 2.5rem 1.75rem;
+    border-bottom: 1px solid var(--border);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+ 
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+ 
+  .section-meta {
+    font-size: 13px;
+    color: var(--muted);
+  }
+ 
+  /* ── LISTINGS GRID ── */
+  .listings {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 2.5rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+  }
+ 
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+ 
+  .card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+  }
+ 
+  /* Photo placeholder */
+  .card-img {
+    height: 220px;
+    background: var(--forest);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+ 
+  .card-img svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.18;
+  }
+
+  /* ── SLIDER STYLES ── */
+  .slider-container {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .slider-wrapper {
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+  }
+
+  .slider-item {
+    min-width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+  }
+
+  .slider-controls {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+
+  .slider-btn {
+    background: rgba(13,31,45,0.8);
+    border: 1px solid rgba(184,149,90,0.5);
+    color: var(--gold);
+    width: 32px;
+    height: 32px;
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .slider-btn:hover {
+    background: rgba(13,31,45,0.95);
+    border-color: var(--gold);
+  }
+
+  .slider-indicators {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+  }
+
+  .slider-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(245,240,232,0.4);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .slider-dot.active {
+    background: var(--gold);
+    width: 16px;
+    border-radius: 3px;
+  }
+
+  .slider-counter {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(13,31,45,0.8);
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 4px 8px;
+    border-radius: 2px;
+    border: 1px solid rgba(184,149,90,0.3);
+    z-index: 10;
+  }
+ 
+  .card-img-label {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.6);
+    background: rgba(13,31,45,0.6);
+    padding: 4px 8px;
+    border-radius: 2px;
+  }
+ 
+  .badge-legality {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 2px;
+  }
+ 
+  .badge-freehold {
+    background: rgba(26,51,40,0.9);
+    color: #7ecca0;
+    border: 1px solid rgba(126,204,160,0.3);
+  }
+ 
+  .badge-leasehold {
+    background: rgba(13,31,45,0.9);
+    color: #93c5fd;
+    border: 1px solid rgba(147,197,253,0.3);
+  }
+ 
+  .card-body {
+    padding: 1.25rem 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+ 
+  .card-location {
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+ 
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--navy);
+  }
+ 
+  .card-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    font-weight: 400;
+    color: var(--navy);
+  }
+ 
+  .card-price .currency {
+    font-size: 1rem;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    margin-left: 4px;
+  }
+ 
+  .card-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 2px;
+  }
+ 
+  .spec-tag {
+    background: var(--tag-bg);
+    color: var(--forest);
+    font-size: 12px;
+    padding: 4px 9px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+ 
+  .spec-tag svg { width: 12px; height: 12px; flex-shrink: 0; }
+ 
+  .card-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+    margin-top: auto;
+  }
+ 
+  /* JSON block */
+  .card-json {
+    background: var(--navy);
+    padding: 1rem 1.25rem;
+    border-top: 2px solid var(--gold);
+  }
+ 
+  .json-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+ 
+  .json-label::after {
+    content: 'DB-READY';
+    background: rgba(184,149,90,0.15);
+    color: var(--gold);
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-size: 9px;
+  }
+ 
+  .json-code {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.7);
+    white-space: pre;
+    overflow-x: auto;
+  }
+ 
+  .json-key   { color: #93c5fd; }
+  .json-str   { color: #a5f3c1; }
+  .json-num   { color: #fcd34d; }
+  .json-bool  { color: #f9a8d4; }
+ 
+  /* ── TECH NOTE ── */
+  .tech-note {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2.5rem 2.5rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+ 
+  .tech-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.75rem;
+  }
+ 
+  .tech-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+ 
+  .tech-card h3 svg { color: var(--gold); flex-shrink: 0; }
+ 
+  .tech-card p, .tech-card li {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+ 
+  .tech-card ul { padding-left: 1.25rem; }
+  .tech-card li { margin-bottom: 4px; }
+ 
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 2rem 2.5rem;
+    text-align: center;
+    border-top: 1px solid rgba(184,149,90,0.2);
+  }
+ 
+  footer p {
+    font-size: 12px;
+    color: rgba(245,240,232,0.35);
+    letter-spacing: 0.04em;
+  }
+ 
+  footer strong { color: var(--gold); font-weight: 400; }
+ 
+  @media (max-width: 700px) {
+    .listings { grid-template-columns: 1fr; padding: 1.25rem; }
+    .tech-note { grid-template-columns: 1fr; padding: 1.25rem; }
+    .hero-stats { gap: 1.5rem; }
+    .section-head { flex-direction: column; gap: 0.5rem; padding: 2rem 1.25rem 1.25rem; }
+    header { padding: 0 1.25rem; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+ 
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 2L15.5 6.5V13.5L9 17L2.5 13.5V6.5L9 2Z" stroke="#b8955a" stroke-width="1.2" fill="none"/>
+        <circle cx="9" cy="9" r="2.5" fill="#b8955a"/>
+      </svg>
+    </div>
+    <span class="logo-text">Bali Home <span>Immo</span></span>
+  </a>
+  <nav>
+    <a href="#">Buy</a>
+    <a href="#">Sell</a>
+    <a href="#">Rent</a>
+    <a href="#">Invest</a>
+    <span class="badge-demo">Demo Build</span>
+  </nav>
+</header>
+ 
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Technical Assessment — Web Developer</p>
+  <h1>Premium Villas for Sale<br>in <em>Bali, Indonesia</em></h1>
+  <p class="hero-sub">Listings sourced and structured via automated data aggregation pipeline — formatted for direct CMS integration.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="number">5</span><span class="label">Properties</span></div>
+    <div class="hero-stat"><span class="number">4</span><span class="label">Areas</span></div>
+    <div class="hero-stat"><span class="number">JSON</span><span class="label">DB-Ready</span></div>
+  </div>
+</section>
+ 
+<!-- LISTINGS -->
+<div class="section-head">
+  <h2 class="section-title">Featured Listings</h2>
+  <span class="section-meta">5 properties · Sorted by price (desc)</span>
+</div>
+ 
+<div class="listings">
+ 
+  <!-- CARD 1: Tabanan -->
+  <div class="card">
+    <div class="card-img">
+      <div class="slider-container">
+        <div class="slider-wrapper" id="slider-tabanan">
+          <div class="slider-item" style="background-image: url('https://images.unsplash.com/photo-1571863533956-7c88b881ceef?w=600&h=400&fit=crop');"></div>
+          <div class="slider-item" style="background-image: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=400&fit=crop');"></div>
+          <div class="slider-item" style="background-image: url('https://images.unsplash.com/photo-1570129477492-45a003537e1d?w=600&h=400&fit=crop');"></div>
+        </div>
+        <div class="slider-counter"><span id="slider-count-tabanan">1</span>/3</div>
+        <div class="slider-controls">
+          <button class="slider-btn" onclick="sliderPrev('tabanan')">‹</button>
+          <button class="slider-btn" onclick="sliderNext('tabanan')">›</button>
+        </div>
+        <div class="slider-indicators" id="slider-dots-tabanan">
+          <div class="slider-dot active" onclick="sliderGoto('tabanan', 0)"></div>
+          <div class="slider-dot" onclick="sliderGoto('tabanan', 1)"></div>
+          <div class="slider-dot" onclick="sliderGoto('tabanan', 2)"></div>
+        </div>
+      </div>
+      <span class="badge-legality badge-freehold">Freehold · SHM</span>
+      <span class="card-img-label">Tabanan, Balian Beach</span>
+    </div>
+    <div class="card-body">
+      <span class="card-location">Tabanan · Balian Beach</span>
+      <h3 class="card-title">Premium Luxury Oceanfront Villa</h3>
+      <div class="card-price">IDR 14,500,000,000 <span class="currency">IDR</span></div>
+      <div class="card-specs">
+        <span class="spec-tag"><svg viewBox="0 0 12 12"><rect x="1" y="5" width="10" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M3 5V3a3 3 0 016 0v2" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>3 BR</span>
+        <span class="spec-tag"><svg viewBox="0 0 12 12"><path d="M1 8h10M3 8V4a2 2 0 014 0" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>3 BA</span>
+        <span class="spec-tag"><svg viewBox="0 0 12 12"><rect x="1" y="3" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>Infinity Pool</span>
+        <span class="spec-tag">356 m² Build</span>
+        <span class="spec-tag">DDAP Architect</span>
+        <span class="spec-tag">Full Furnished</span>
+      </div>
+      <p class="card-desc">Oceanfront villa designed by renowned Indonesian bureau DDAP Architect (2021). Infinity pool with panoramic ocean view, 50 m to surf spot, 49 km from Ngurah Rai Airport.</p>
+    </div>
+    <div class="card-json">
+      <p class="json-label">Backend JSON Mapping</p>
+      <div class="json-code"><span class="json-key">"property_id"</span>: <span class="json-str">"BHI-TABANAN-001"</span>,
+<span class="json-key">"price"</span>: { <span class="json-key">"idr"</span>: <span class="json-num">14500000000</span>, <span class="json-key">"type"</span>: <span class="json-str">"Freehold"</span> },
+<span class="json-key">"specs"</span>: { <span class="json-key">"beds"</span>: <span class="json-num">3</span>, <span class="json-key">"pool"</span>: <span class="json-bool">true</span>, <span class="json-key">"build_m2"</span>: <span class="json-num">356</span> }</div>
+    </div>
+  </div>
+ 
+  <!-- CARD 2: Kerobokan -->
+  <div class="card">
+    <div class="card-img" style="background: linear-gradient(160deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);">
+      <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect x="80" y="100" width="240" height="120" rx="2" fill="#ffffff" opacity="0.1"/>
+        <rect x="100" y="80" width="200" height="50" rx="2" fill="#ffffff" opacity="0.12"/>
+        <path d="M120 80 L200 40 L280 80Z" fill="#ffffff" opacity="0.1"/>
+        <rect x="150" y="130" width="30" height="50" fill="rgba(255,255,255,0.15)"/>
+        <rect x="220" y="130" width="30" height="50" fill="rgba(255,255,255,0.15)"/>
+        <rect x="340" y="160" width="60" height="4" fill="#ffffff" opacity="0.15"/>
+        <path d="M0 200 Q100 170 200 185 Q300 200 400 175 L400 220 L0 220Z" fill="#ffffff" opacity="0.08"/>
+        <rect x="20" y="155" width="50" height="55" rx="2" fill="#ffffff" opacity="0.08"/>
+      </svg>
+      <span class="badge-legality badge-freehold">Freehold · SHM</span>
+      <span class="card-img-label">Kerobokan, Badung</span>
+    </div>
+    <div class="card-body">
+      <span class="card-location">Kerobokan · Badung</span>
+      <h3 class="card-title">Tropical Modern Villa — Kerobokan</h3>
+      <div class="card-price">IDR 12,850,000,000 <span class="currency">IDR</span></div>
+      <div class="card-specs">
+        <span class="spec-tag">4 BR</span>
+        <span class="spec-tag">4 BA</span>
+        <span class="spec-tag">Swimming Pool</span>
+        <span class="spec-tag">300 m² Land</span>
+        <span class="spec-tag">260 m² Build</span>
+        <span class="spec-tag">Water Filtration</span>
+        <span class="spec-tag">Full Furnished</span>
+      </div>
+      <p class="card-desc">Spacious SHM villa with premium sanitary, water filtration system, open-space dining area, laundry room, and dual 7700W electricity. Strategic access to Canggu and Seminyak.</p>
+    </div>
+    <div class="card-json">
+      <p class="json-label">Backend JSON Mapping</p>
+      <div class="json-code"><span class="json-key">"property_id"</span>: <span class="json-str">"BHI-KEROBOKAN-003"</span>,
+<span class="json-key">"price"</span>: { <span class="json-key">"idr"</span>: <span class="json-num">12850000000</span>, <span class="json-key">"type"</span>: <span class="json-str">"Freehold"</span> },
+<span class="json-key">"specs"</span>: { <span class="json-key">"beds"</span>: <span class="json-num">4</span>, <span class="json-key">"pool"</span>: <span class="json-bool">true</span>, <span class="json-key">"land_m2"</span>: <span class="json-num">300</span> }</div>
+    </div>
+  </div>
+ 
+  <!-- CARD 3: Seminyak -->
+  <div class="card">
+    <div class="card-img" style="background: linear-gradient(160deg, #1c1c1c 0%, #2a2318 60%, #3a3020 100%);">
+      <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <path d="M0 100 Q50 80 100 95 Q150 110 200 90 Q250 70 300 85 Q350 100 400 80 L400 220 L0 220Z" fill="#ffffff" opacity="0.06"/>
+        <rect x="120" y="120" width="160" height="100" fill="#ffffff" opacity="0.08"/>
+        <rect x="140" y="100" width="120" height="35" fill="#ffffff" opacity="0.08"/>
+        <rect x="155" y="100" width="90" height="20" fill="#ffffff" opacity="0.06"/>
+        <rect x="50" y="150" width="60" height="70" fill="#ffffff" opacity="0.06"/>
+        <rect x="290" y="155" width="60" height="65" fill="#ffffff" opacity="0.06"/>
+        <path d="M0 190 Q200 170 400 190 L400 220 L0 220Z" fill="#ffffff" opacity="0.1"/>
+      </svg>
+      <span class="badge-legality badge-freehold">Freehold · Hak Milik</span>
+      <span class="card-img-label">Seminyak, Badung</span>
+    </div>
+    <div class="card-body">
+      <span class="card-location">Seminyak · Badung</span>
+      <h3 class="card-title">Gated Ricefield View Villa</h3>
+      <div class="card-price">IDR 3,900,000,000 <span class="currency">IDR · Nego</span></div>
+      <div class="card-specs">
+        <span class="spec-tag">2 BR</span>
+        <span class="spec-tag">2 BA</span>
+        <span class="spec-tag">Gated 24h</span>
+        <span class="spec-tag">112 m² Land</span>
+        <span class="spec-tag">Ricefield View</span>
+        <span class="spec-tag">Full Furnished</span>
+      </div>
+      <p class="card-desc">North-facing villa with dual-side ricefield views. Integrated one-gate security system with 24-hour guards. Located on 6-meter access road in central Seminyak. Wi-Fi included.</p>
+    </div>
+    <div class="card-json">
+      <p class="json-label">Backend JSON Mapping</p>
+      <div class="json-code"><span class="json-key">"property_id"</span>: <span class="json-str">"BHI-SEMINYAK-004"</span>,
+<span class="json-key">"price"</span>: { <span class="json-key">"idr"</span>: <span class="json-num">3900000000</span>, <span class="json-key">"nego"</span>: <span class="json-bool">true</span> },
+<span class="json-key">"specs"</span>: { <span class="json-key">"beds"</span>: <span class="json-num">2</span>, <span class="json-key">"gated"</span>: <span class="json-bool">true</span>, <span class="json-key">"view"</span>: <span class="json-str">"ricefield"</span> }</div>
+    </div>
+  </div>
+ 
+  <!-- CARD 4: Ungasan -->
+  <div class="card">
+    <div class="card-img" style="background: linear-gradient(160deg, #1e1a28 0%, #2d2038 60%, #3d2a40 100%);">
+      <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <circle cx="320" cy="55" r="45" fill="#ffffff" opacity="0.06"/>
+        <rect x="100" y="110" width="200" height="110" rx="2" fill="#ffffff" opacity="0.07"/>
+        <rect x="120" y="90" width="160" height="35" rx="1" fill="#ffffff" opacity="0.07"/>
+        <rect x="175" y="90" width="50" height="20" rx="10" fill="#ffffff" opacity="0.08"/>
+        <rect x="140" y="140" width="40" height="50" rx="1" fill="rgba(255,255,255,0.12)"/>
+        <rect x="220" y="140" width="40" height="50" rx="1" fill="rgba(255,255,255,0.12)"/>
+        <path d="M50 200 Q120 180 200 195 Q280 210 400 185 L400 220 L0 220Z" fill="#ffffff" opacity="0.07"/>
+      </svg>
+      <span class="badge-legality badge-leasehold">Leasehold · 25 Yrs</span>
+      <span class="card-img-label">Ungasan, South Kuta</span>
+    </div>
+    <div class="card-body">
+      <span class="card-location">Ungasan · South Kuta, Badung</span>
+      <h3 class="card-title">Mediterranean Elegance Exclusive Villa</h3>
+      <div class="card-price">IDR 3,350,000,000 <span class="currency">≈ USD 210,000</span></div>
+      <div class="card-specs">
+        <span class="spec-tag">3 BR</span>
+        <span class="spec-tag">3 Ensuite BA</span>
+        <span class="spec-tag">Private Pool</span>
+        <span class="spec-tag">140 m² Land</span>
+        <span class="spec-tag">100m to Main Rd</span>
+        <span class="spec-tag">Full Furnished</span>
+      </div>
+      <p class="card-desc">Mediterranean style meets Balinese serenity. 100 m to Jimbaran-Uluwatu road, 10 minutes to GWK, Balangan, Dreamland and Bingin Beach. Listed at louiscornelis.com.</p>
+    </div>
+    <div class="card-json">
+      <p class="json-label">Backend JSON Mapping</p>
+      <div class="json-code"><span class="json-key">"property_id"</span>: <span class="json-str">"BHI-UNGASAN-002"</span>,
+<span class="json-key">"price"</span>: { <span class="json-key">"idr"</span>: <span class="json-num">3350000000</span>, <span class="json-key">"usd"</span>: <span class="json-num">210000</span> },
+<span class="json-key">"lease"</span>: { <span class="json-key">"years"</span>: <span class="json-num">25</span>, <span class="json-key">"renewable"</span>: <span class="json-bool">true</span> }</div>
+    </div>
+  </div>
+ 
+  <!-- CARD 5: Nusa Dua -->
+  <div class="card">
+    <div class="card-img" style="background: linear-gradient(160deg, #0d1f2d 0%, #0d2535 60%, #0d2d3a 100%);">
+      <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect x="90" y="120" width="220" height="100" rx="2" fill="#ffffff" opacity="0.07"/>
+        <rect x="110" y="100" width="180" height="30" rx="1" fill="#ffffff" opacity="0.07"/>
+        <path d="M130 100 L200 65 L270 100Z" fill="#ffffff" opacity="0.07"/>
+        <rect x="155" y="135" width="25" height="45" fill="rgba(255,255,255,0.13)"/>
+        <rect x="220" y="135" width="25" height="45" fill="rgba(255,255,255,0.13)"/>
+        <circle cx="335" cy="55" r="30" fill="#ffffff" opacity="0.05"/>
+        <circle cx="335" cy="55" r="20" fill="#ffffff" opacity="0.05"/>
+        <path d="M0 185 Q150 165 300 180 Q350 185 400 170 L400 220 L0 220Z" fill="#ffffff" opacity="0.07"/>
+      </svg>
+      <span class="badge-legality badge-freehold">Freehold · SHM + SLF</span>
+      <span class="card-img-label">Nusa Dua, Badung</span>
+    </div>
+    <div class="card-body">
+      <span class="card-location">Nusa Dua · Elite Cluster, Badung</span>
+      <h3 class="card-title">New Santorini Style Villa — Elite Cluster</h3>
+      <div class="card-price">IDR 2,300,000,000 <span class="currency">IDR · Nego</span></div>
+      <div class="card-specs">
+        <span class="spec-tag">2 BR</span>
+        <span class="spec-tag">2 BA</span>
+        <span class="spec-tag">Pool</span>
+        <span class="spec-tag">129 m² Land</span>
+        <span class="spec-tag">Rental Yield</span>
+        <span class="spec-tag">SLF Certified</span>
+      </div>
+      <p class="card-desc">Mediterranean Santorini design in an elite gated cluster. Rental yield potential of IDR 200M/year. 10 min to Gunung Payung Beach, 15 min to Sundays Beach Club, 20 min to GWK.</p>
+    </div>
+    <div class="card-json">
+      <p class="json-label">Backend JSON Mapping</p>
+      <div class="json-code"><span class="json-key">"property_id"</span>: <span class="json-str">"BHI-NUSADUA-005"</span>,
+<span class="json-key">"price"</span>: { <span class="json-key">"idr"</span>: <span class="json-num">2300000000</span>, <span class="json-key">"nego"</span>: <span class="json-bool">true</span> },
+<span class="json-key">"rental_yield_idr_annual"</span>: <span class="json-num">200000000</span></div>
+    </div>
+  </div>
+ 
+</div>
+ 
+<div style="background: var(--cream); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-head" style="background: transparent; border-bottom: 1px solid var(--border);">
+    <h2 class="section-title">Developer Notes</h2>
+    <span class="section-meta">Technical Assessment — Web Developer</span>
+  </div>
+  <div class="tech-note">
+    <div class="tech-card">
+      <h3>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--gold)">
+          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        </svg>
+        Data Collection Approach
+      </h3>
+      <p style="margin-bottom: 0.75rem;">This listing page simulates what an automated data collection pipeline would produce for the Bali Home Immo CMS. Rather than manually copy-pasting property details, a web developer would build:</p>
+      <ul>
+        <li>A <strong>parser script</strong> (Python/Node.js) to extract structured fields from listing sources</li>
+        <li>A <strong>data cleaning layer</strong> to normalize prices, specs, and location strings</li>
+        <li>A <strong>JSON formatter</strong> outputting records directly insertable into the database</li>
+        <li>A <strong>CDN pipeline</strong> to compress and host property images in .webp format</li>
+      </ul>
+    </div>
+    <div class="tech-card">
+      <h3>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--gold)">
+          <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+        </svg>
+        Database Schema (JSON)
+      </h3>
+      <p style="margin-bottom: 0.75rem;">Each property maps to a consistent schema for the backend CMS. This ensures frontend rendering components can rely on stable data shapes:</p>
+      <ul>
+        <li><strong>property_id</strong> — unique slug (e.g. BHI-TABANAN-001)</li>
+        <li><strong>price</strong> — IDR + optional USD, Freehold/Leasehold type</li>
+        <li><strong>specs</strong> — beds, baths, pool, land_m2, build_m2</li>
+        <li><strong>media</strong> — CDN URL array in .webp format for fast page load</li>
+        <li><strong>legality</strong> — SHM/SHB/Leasehold with duration &amp; renewal flag</li>
+      </ul>
+    </div>
+  </div>
+</div>
+ 
+<!-- FOOTER -->
+<footer>
+  <p>Built as a <strong>Technical Assessment</strong> for the Web Developer position at <strong>Bali Home Immo</strong> &nbsp;·&nbsp; bali-home-immo.com &nbsp;·&nbsp; All listing data sourced from public marketplace channels &nbsp;·&nbsp; 2025</p>
+</footer>
+
+<script>
+// Slider functionality
+let sliderState = {
+  tabanan: { current: 0, total: 3 }
+};
+
+function updateSlider(id) {
+  const state = sliderState[id];
+  const wrapper = document.getElementById(`slider-${id}`);
+  const offset = -state.current * 100;
+  wrapper.style.transform = `translateX(${offset}%)`;
+  
+  // Update counter
+  const counter = document.getElementById(`slider-count-${id}`);
+  if (counter) counter.textContent = state.current + 1;
+  
+  // Update dots
+  const dots = document.querySelectorAll(`#slider-dots-${id} .slider-dot`);
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle('active', idx === state.current);
+  });
+}
+
+function sliderNext(id) {
+  const state = sliderState[id];
+  state.current = (state.current + 1) % state.total;
+  updateSlider(id);
+}
+
+function sliderPrev(id) {
+  const state = sliderState[id];
+  state.current = (state.current - 1 + state.total) % state.total;
+  updateSlider(id);
+}
+
+function sliderGoto(id, index) {
+  sliderState[id].current = index;
+  updateSlider(id);
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') sliderNext('tabanan');
+  if (e.key === 'ArrowLeft') sliderPrev('tabanan');
+});
+</script>
+ 
+</body>
+</html>
+ 
