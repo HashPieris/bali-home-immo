@@ -1,0 +1,55 @@
+<!-- 
+  PROPERTY CARD COMPONENT WITH SLIDER
+  Location: components/card-template.html (untuk referensi)
+  Digunakan di: index.html di dalam <div class="listings">
+  
+  Template untuk membuat card baru dengan slider gambar
+  Ganti:
+  - [LOCATION]: Lokasi properti
+  - [TITLE]: Judul properti
+  - [PRICE]: Harga properti
+  - [ID]: ID unik untuk slider (e.g., tabanan)
+  - [IMAGES]: URL gambar (minimal 3 untuk slider)
+  - [SPECS]: Spesifikasi properti
+  - [DESC]: Deskripsi properti
+  - [JSON_DATA]: Data JSON untuk backend
+-->
+
+<div class="card">
+  <div class="card-img">
+    <div class="slider-container">
+      <div class="slider-wrapper" id="slider-[ID]">
+        <div class="slider-item" style="background-image: url('[IMAGE_1]');"></div>
+        <div class="slider-item" style="background-image: url('[IMAGE_2]');"></div>
+        <div class="slider-item" style="background-image: url('[IMAGE_3]');"></div>
+      </div>
+      <div class="slider-counter"><span id="slider-count-[ID]">1</span>/3</div>
+      <div class="slider-controls">
+        <button class="slider-btn" onclick="sliderPrev('[ID]')">‹</button>
+        <button class="slider-btn" onclick="sliderNext('[ID]')">›</button>
+      </div>
+      <div class="slider-indicators" id="slider-dots-[ID]">
+        <div class="slider-dot active" onclick="sliderGoto('[ID]', 0)"></div>
+        <div class="slider-dot" onclick="sliderGoto('[ID]', 1)"></div>
+        <div class="slider-dot" onclick="sliderGoto('[ID]', 2)"></div>
+      </div>
+    </div>
+    <span class="badge-legality badge-freehold">Freehold · SHM</span>
+    <span class="card-img-label">[LOCATION]</span>
+  </div>
+  
+  <div class="card-body">
+    <span class="card-location">[LOCATION]</span>
+    <h3 class="card-title">[TITLE]</h3>
+    <div class="card-price">[PRICE] <span class="currency">IDR</span></div>
+    <div class="card-specs">
+      [SPECS]
+    </div>
+    <p class="card-desc">[DESC]</p>
+  </div>
+  
+  <div class="card-json">
+    <p class="json-label">Backend JSON Mapping</p>
+    <div class="json-code">[JSON_DATA]</div>
+  </div>
+</div>

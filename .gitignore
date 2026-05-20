@@ -1,0 +1,14 @@
+# Git Ignore Rules
+node_modules/
+.DS_Store
+*.log
+.vscode/settings.json
+dist/
+build/
+.env
+*.swp
+*.swo
+*~
+.cache/
+.idea/
+*.bak
