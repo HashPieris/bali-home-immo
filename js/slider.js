@@ -4,7 +4,11 @@
  */
 
 let sliderState = {
-  tabanan: { current: 0, total: 3 }
+  tabanan: { current: 0, total: 3 },
+  seminyak: { current: 0, total: 3 },
+  ungasan: { current: 0, total: 3 },
+  nusadua: { current: 0, total: 3 },
+  melasti: { current: 0, total: 3 }
 };
 
 /**

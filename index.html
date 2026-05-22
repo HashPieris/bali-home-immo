@@ -96,9 +96,9 @@
     <div class="card-img">
       <div class="slider-container">
         <div class="slider-wrapper" id="slider-tabanan">
-          <div class="slider-item" style="background-image: url('https://images.unsplash.com/photo-1571863533956-7c88b881ceef?w=600&h=400&fit=crop');"></div>
-          <div class="slider-item" style="background-image: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=400&fit=crop');"></div>
-          <div class="slider-item" style="background-image: url('https://images.unsplash.com/photo-1570129477492-45a003537e1d?w=600&h=400&fit=crop');"></div>
+          <div class="slider-item" style="background-image: url('./assets/images/bali1.jpg');"></div>
+          <div class="slider-item" style="background-image: url('./assets/images/bali2.jpg');"></div>
+          <div class="slider-item" style="background-image: url('./assets/images/bali3.jpg');"></div>
         </div>
         <div class="slider-counter"><span id="slider-count-tabanan">1</span>/3</div>
         <div class="slider-controls">
@@ -136,16 +136,24 @@
     </div>
   </div>
   <div class="card">
-    <div class="card-img" style="background: linear-gradient(160deg, #1c1c1c 0%, #2a2318 60%, #3a3020 100%);">
-      <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-        <path d="M0 100 Q50 80 100 95 Q150 110 200 90 Q250 70 300 85 Q350 100 400 80 L400 220 L0 220Z" fill="#ffffff" opacity="0.06"/>
-        <rect x="120" y="120" width="160" height="100" fill="#ffffff" opacity="0.08"/>
-        <rect x="140" y="100" width="120" height="35" fill="#ffffff" opacity="0.08"/>
-        <rect x="155" y="100" width="90" height="20" fill="#ffffff" opacity="0.06"/>
-        <rect x="50" y="150" width="60" height="70" fill="#ffffff" opacity="0.06"/>
-        <rect x="290" y="155" width="60" height="65" fill="#ffffff" opacity="0.06"/>
-        <path d="M0 190 Q200 170 400 190 L400 220 L0 220Z" fill="#ffffff" opacity="0.1"/>
-      </svg>
+    <div class="card-img">
+      <div class="slider-container">
+        <div class="slider-wrapper" id="slider-seminyak">
+          <div class="slider-item" style="background-image: url('./assets/images/bali4.jpg');"></div>
+          <div class="slider-item" style="background-image: url('./assets/images/bali5.jpg');"></div>
+          <div class="slider-item" style="background-image: url('./assets/images/bali6.jpg');"></div>
+        </div>
+        <div class="slider-counter"><span id="slider-count-seminyak">1</span>/3</div>
+        <div class="slider-controls">
+          <button class="slider-btn" onclick="sliderPrev('seminyak')">‹</button>
+          <button class="slider-btn" onclick="sliderNext('seminyak')">›</button>
+        </div>
+        <div class="slider-indicators" id="slider-dots-seminyak">
+          <div class="slider-dot active" onclick="sliderGoto('seminyak', 0)"></div>
+          <div class="slider-dot" onclick="sliderGoto('seminyak', 1)"></div>
+          <div class="slider-dot" onclick="sliderGoto('seminyak', 2)"></div>
+        </div>
+      </div>
       <span class="badge-legality badge-freehold">Freehold · Hak Milik</span>
       <span class="card-img-label">Seminyak, Badung</span>
     </div>
@@ -171,16 +179,24 @@
     </div>
   </div>
   <div class="card">
-    <div class="card-img" style="background: linear-gradient(160deg, #1e1a28 0%, #2d2038 60%, #3d2a40 100%);">
-      <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-        <circle cx="320" cy="55" r="45" fill="#ffffff" opacity="0.06"/>
-        <rect x="100" y="110" width="200" height="110" rx="2" fill="#ffffff" opacity="0.07"/>
-        <rect x="120" y="90" width="160" height="35" rx="1" fill="#ffffff" opacity="0.07"/>
-        <rect x="175" y="90" width="50" height="20" rx="10" fill="#ffffff" opacity="0.08"/>
-        <rect x="140" y="140" width="40" height="50" rx="1" fill="rgba(255,255,255,0.12)"/>
-        <rect x="220" y="140" width="40" height="50" rx="1" fill="rgba(255,255,255,0.12)"/>
-        <path d="M50 200 Q120 180 200 195 Q280 210 400 185 L400 220 L0 220Z" fill="#ffffff" opacity="0.07"/>
-      </svg>
+    <div class="card-img">
+      <div class="slider-container">
+        <div class="slider-wrapper" id="slider-ungasan">
+          <div class="slider-item" style="background-image: url('./assets/images/bali7.jpg');"></div>
+          <div class="slider-item" style="background-image: url('./assets/images/bali8.jpg');"></div>
+          <div class="slider-item" style="background-image: url('./assets/images/bali9.jpg');"></div>
+        </div>
+        <div class="slider-counter"><span id="slider-count-ungasan">1</span>/3</div>
+        <div class="slider-controls">
+          <button class="slider-btn" onclick="sliderPrev('ungasan')">‹</button>
+          <button class="slider-btn" onclick="sliderNext('ungasan')">›</button>
+        </div>
+        <div class="slider-indicators" id="slider-dots-ungasan">
+          <div class="slider-dot active" onclick="sliderGoto('ungasan', 0)"></div>
+          <div class="slider-dot" onclick="sliderGoto('ungasan', 1)"></div>
+          <div class="slider-dot" onclick="sliderGoto('ungasan', 2)"></div>
+        </div>
+      </div>
       <span class="badge-legality badge-leasehold">Leasehold · 25 Yrs</span>
       <span class="card-img-label">Ungasan, South Kuta</span>
     </div>
@@ -206,17 +222,24 @@
     </div>
   </div>
   <div class="card">
-    <div class="card-img" style="background: linear-gradient(160deg, #0d1f2d 0%, #0d2535 60%, #0d2d3a 100%);">
-      <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-        <rect x="90" y="120" width="220" height="100" rx="2" fill="#ffffff" opacity="0.07"/>
-        <rect x="110" y="100" width="180" height="30" rx="1" fill="#ffffff" opacity="0.07"/>
-        <path d="M130 100 L200 65 L270 100Z" fill="#ffffff" opacity="0.07"/>
-        <rect x="155" y="135" width="25" height="45" fill="rgba(255,255,255,0.13)"/>
-        <rect x="220" y="135" width="25" height="45" fill="rgba(255,255,255,0.13)"/>
-        <circle cx="335" cy="55" r="30" fill="#ffffff" opacity="0.05"/>
-        <circle cx="335" cy="55" r="20" fill="#ffffff" opacity="0.05"/>
-        <path d="M0 185 Q150 165 300 180 Q350 185 400 170 L400 220 L0 220Z" fill="#ffffff" opacity="0.07"/>
-      </svg>
+    <div class="card-img">
+      <div class="slider-container">
+        <div class="slider-wrapper" id="slider-nusadua">
+          <div class="slider-item" style="background-image: url('./assets/images/bali10.jpg');"></div>
+          <div class="slider-item" style="background-image: url('./assets/images/bali11.jpg');"></div>
+          <div class="slider-item" style="background-image: url('./assets/images/bali12.jpg');"></div>
+        </div>
+        <div class="slider-counter"><span id="slider-count-nusadua">1</span>/3</div>
+        <div class="slider-controls">
+          <button class="slider-btn" onclick="sliderPrev('nusadua')">‹</button>
+          <button class="slider-btn" onclick="sliderNext('nusadua')">›</button>
+        </div>
+        <div class="slider-indicators" id="slider-dots-nusadua">
+          <div class="slider-dot active" onclick="sliderGoto('nusadua', 0)"></div>
+          <div class="slider-dot" onclick="sliderGoto('nusadua', 1)"></div>
+          <div class="slider-dot" onclick="sliderGoto('nusadua', 2)"></div>
+        </div>
+      </div>
       <span class="badge-legality badge-freehold">Freehold · SHM + SLF</span>
       <span class="card-img-label">Nusa Dua, Badung</span>
     </div>
@@ -239,6 +262,51 @@
       <div class="json-code"><span class="json-key">"property_id"</span>: <span class="json-str">"BHI-NUSADUA-005"</span>,
 <span class="json-key">"price"</span>: { <span class="json-key">"idr"</span>: <span class="json-num">2300000000</span>, <span class="json-key">"nego"</span>: <span class="json-bool">true</span> },
 <span class="json-key">"rental_yield_idr_annual"</span>: <span class="json-num">200000000</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-img">
+      <div class="slider-container">
+        <div class="slider-wrapper" id="slider-melasti">
+          <div class="slider-item" style="background-image: url('./assets/images/bali13.jpg');"></div>
+          <div class="slider-item" style="background-image: url('./assets/images/bali14.jpg');"></div>
+          <div class="slider-item" style="background-image: url('./assets/images/bali15.jpg');"></div>
+        </div>
+        <div class="slider-counter"><span id="slider-count-melasti">1</span>/3</div>
+        <div class="slider-controls">
+          <button class="slider-btn" onclick="sliderPrev('melasti')">‹</button>
+          <button class="slider-btn" onclick="sliderNext('melasti')">›</button>
+        </div>
+        <div class="slider-indicators" id="slider-dots-melasti">
+          <div class="slider-dot active" onclick="sliderGoto('melasti', 0)"></div>
+          <div class="slider-dot" onclick="sliderGoto('melasti', 1)"></div>
+          <div class="slider-dot" onclick="sliderGoto('melasti', 2)"></div>
+        </div>
+      </div>
+      <span class="badge-legality badge-freehold">Freehold · SHM</span>
+      <span class="card-img-label">Melasti, Ungasan</span>
+    </div>
+    <div class="card-body">
+      <span class="card-location">Melasti · Ungasan, Badung</span>
+      <h3 class="card-title">Brand New Villa — Santorini Style Melasti</h3>
+      <div class="card-price">IDR 1,950,000,000 <span class="currency">IDR · Nego</span></div>
+      <div class="card-specs">
+        <span class="spec-tag">2 BR</span>
+        <span class="spec-tag">3 BA</span>
+        <span class="spec-tag">Swimming Pool</span>
+        <span class="spec-tag">130 m² Land</span>
+        <span class="spec-tag">100 m² Build</span>
+        <span class="spec-tag">Free Kitchen Set</span>
+        <span class="spec-tag">Garden & Balcony</span>
+        <span class="spec-tag">Carport</span>
+      </div>
+      <p class="card-desc">Brand new villa with Santorini style architecture. Features 3 bathrooms, modern kitchen set, swimming pool, garden, and balcony. PDAM water, SHM title, SLF in process. 5500W electricity, 5m road access. Contact: +62 812-371-0264</p>
+    </div>
+    <div class="card-json">
+      <p class="json-label">Backend JSON Mapping</p>
+      <div class="json-code"><span class="json-key">"property_id"</span>: <span class="json-str">"BHI-UNGASAN-006"</span>,
+<span class="json-key">"price"</span>: { <span class="json-key">"idr"</span>: <span class="json-num">1950000000</span>, <span class="json-key">"nego"</span>: <span class="json-bool">true</span> },
+<span class="json-key">"specs"</span>: { <span class="json-key">"beds"</span>: <span class="json-num">2</span>, <span class="json-key">"baths"</span>: <span class="json-num">3</span>, <span class="json-key">"land_m2"</span>: <span class="json-num">130</span>, <span class="json-key">"build_m2"</span>: <span class="json-num">100</span> }</div>
     </div>
   </div>
  
