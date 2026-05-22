@@ -1,79 +1,163 @@
-Bali Home Immo
-Property listing platform for villas for sale in Bali. Built as a technical assessment for Web Developer position.
+# Bali Home Immo - Property Listing Platform
 
-Project Structure
-text
+Professional property listing platform for Bali real estate. Showcases villa inventory with interactive image galleries, responsive design, and structured data formatting for CMS integration.
+
+## Overview
+
+Bali Home Immo is a modern web application designed to present property listings with emphasis on visual presentation and seamless user experience across devices. The platform implements a modular architecture with separation of concerns, featuring individual property cards with multi-image galleries, detailed specifications, and JSON-formatted backend mapping.
+
+## Directory Structure
+
+```
 bali-home-immo/
-├── index.html
+├── index.html                 # Entry point with all property listings
 ├── css/
-│   ├── variables.css      # Colors & design tokens
-│   ├── styles.css         # Main styling
-│   ├── slider.css         # Image gallery
-│   └── responsive.css     # Breakpoints
+│   ├── variables.css          # Design tokens (colors, typography scales)
+│   ├── styles.css             # Component styling (header, cards, footer)
+│   ├── slider.css             # Image gallery component styles
+│   └── responsive.css         # Breakpoint definitions (700px, 480px)
 ├── js/
-│   └── slider.js          # Gallery logic
-├── components/
+│   └── slider.js              # Image gallery state management and controls
+├── components/                # Documentation templates (reference only)
 │   ├── header.html
 │   ├── hero.html
 │   ├── card-template.html
 │   └── footer.html
-└── assets/
-    ├── images/
-    └── icons/
-Features
-Image Slider per Property
-Each property card has a 3-slide image gallery. Smooth transitions, navigation buttons, dot indicators, and keyboard arrows support.
+├── assets/
+│   ├── images/                # Property images (bali1-15.jpg)
+│   └── icons/                 # UI icons
+├── STRUCTURE.md               # Technical architecture documentation
+├── ASSETS.md                  # Asset organization reference
+└── README.md                  # This file
+```
 
-Design System
-Centralized color variables, consistent spacing, typography using Cormorant Garamond and DM Sans.
+## Core Features
 
-Responsive
-Desktop grid, tablet adaptive, mobile single column.
+### Image Gallery System
+Each property card includes a 3-image slider with the following capabilities:
+- Keyboard navigation (arrow keys for prev/next)
+- Click controls (prev/next buttons)
+- Dot indicators for direct slide navigation
+- Image counter display
+- Circular navigation (loops at start/end)
 
-Getting Started
-Open index.html in a browser, or run a local server:
+### Design System
+Centralized design token management through CSS custom properties:
+- Color palette: Navy (#0d1f2d), Gold (#b8955a), Cream (#f5f0e8), Forest, Sand, Muted
+- Typography: Cormorant Garamond (display), DM Sans (interface)
+- Spacing and sizing scales defined in variables.css
+- Consistent badge styling for property attributes
 
-bash
+### Responsive Design
+Multi-breakpoint responsive layout:
+- Desktop: 4-column CSS Grid with 340px minimum width
+- Tablet (max 700px): 2-column adaptive layout
+- Mobile (max 480px): Single column full-width display
+- Touch-friendly controls for all devices
+
+### Data Structure
+Property listings include structured JSON mapping for backend integration:
+- Unique property identifiers
+- Pricing in IDR and USD with negotiation flags
+- Rental yield calculations
+- Specifications and metadata
+- Legal documentation status
+
+## Installation and Usage
+
+### Quick Start
+Open index.html directly in a web browser, or run a local development server:
+
+```bash
 python -m http.server 8000
-Then visit http://localhost:8000
+```
 
-Adding a New Property
-Copy the card template from components/card-template.html
+Then navigate to `http://localhost:8000`
 
-Paste inside <div class="listings"> container
+### Adding a New Property
 
-Update the placeholders with your property data
+1. Locate `<div class="listings">` container in index.html
+2. Add new card structure before the closing `</div>` tag
+3. Update property details: location, title, price, specifications, images
+4. Add image references to assets/images/ directory
+5. Register slider state in js/slider.js:
 
-Register the new slider in js/slider.js:
-
-javascript
-sliderState = {
+```javascript
+let sliderState = {
   // existing entries...
-  newPropertyId: { current: 0, total: 3 }
+  propertyId: { current: 0, total: 3 }
 };
-Customizing Styles
-Edit css/variables.css for colors:
+```
 
-css
+### Modifying the Design System
+
+Edit css/variables.css to update colors:
+
+```css
 :root {
-  --navy:    #0d1f2d;
-  --gold:    #b8955a;
-  --cream:   #f5f0e8;
+  --navy: #0d1f2d;
+  --gold: #b8955a;
+  --cream: #f5f0e8;
+  --forest: #1a4d2e;
+  --sand: #d4a574;
 }
-Browser Support
-Chrome, Firefox, Safari, Edge (latest 2 versions). Mobile browsers included.
+```
 
-Future Plans
-JSON-driven card generation
+Changes apply globally to all components through CSS inheritance.
 
-Property filtering and search
+## Technical Specifications
 
-Image lazy loading
+### Browser Compatibility
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+- Mobile browsers (iOS Safari, Chrome Mobile)
 
-Admin panel for listings
+### Image Requirements
+- Format: JPEG recommended for compression
+- Dimensions: 600x400px optimal (aspect ratio 3:2)
+- Color space: sRGB
+- Naming convention: bali{n}.jpg (e.g., bali1.jpg, bali2.jpg)
 
-Deployment
-Tested with GitHub Pages, Netlify, and Vercel. For production, consider minifying CSS and optimizing images to WebP format.
+### Performance Considerations
+- CSS Grid for efficient layout calculation
+- CSS transforms for smooth slider transitions (GPU accelerated)
+- External fonts loaded from Google Fonts CDN
+- Minification recommended for production
 
-Technical assessment for Bali Home Immo
+## Deployment
+
+The platform is tested for compatibility with:
+- GitHub Pages (static hosting)
+- Netlify (build-free deployment)
+- Vercel (serverless platform)
+- Traditional shared hosting (FTP/SFTP)
+
+### Production Optimization
+- Minify CSS and JavaScript files
+- Convert images to WebP format with fallbacks
+- Enable gzip compression on server
+- Implement lazy loading for images below viewport
+
+## File Dependencies
+
+- index.html requires: css/variables.css, css/styles.css, css/slider.css, css/responsive.css, js/slider.js
+- js/slider.js requires: DOM elements with specific ID patterns (slider-{id}, slider-count-{id}, slider-dots-{id})
+- All CSS files use @import for proper cascading order
+
+## Maintenance
+
+### Adding/Removing Properties
+Update the hero statistics in index.html when property count changes:
+```html
+<span class="number">5</span><span class="label">Properties</span>
+```
+
+### Image Gallery Troubleshooting
+Verify slider registration in js/slider.js and confirm image paths use correct relative URL format: `./assets/images/filename.jpg`
+
+## Project Information
+
+Built as technical assessment demonstrating front-end development practices including semantic HTML structure, modular CSS architecture, vanilla JavaScript state management, responsive design patterns, and professional code organization.
 
