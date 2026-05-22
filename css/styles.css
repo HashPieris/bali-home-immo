@@ -44,6 +44,13 @@ header {
 
 .logo-mark svg { display: block; }
 
+.logo-mark img {
+  display: block;
+  width: 22px;
+  height: 11px;
+  filter: invert(72%) sepia(46%) saturate(1029%) hue-rotate(6deg) brightness(100%) contrast(92%);
+}
+
 .logo-text {
   font-family: 'Cormorant Garamond', serif;
   font-size: 20px;
