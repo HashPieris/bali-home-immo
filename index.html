@@ -12,6 +12,23 @@
 <link rel="stylesheet" href="./css/responsive.css">
 </head>
 <body>
+<div id="pdfModal" class="modal">
+  <div class="modal-overlay" onclick="closeModal()"></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Technical Assessment Report</h2>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <iframe id="pdfViewer" src="./assets/report.html" type="text/html"></iframe>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal()">Close</button>
+      <button class="btn-primary" onclick="downloadReport()">Download PDF</button>
+    </div>
+  </div>
+</div>
+
 <header>
   <a href="#" class="logo">
     <div class="logo-mark">
@@ -305,6 +322,43 @@
   <p>Built as a <strong>Technical Assessment</strong> for the Web Developer position at <strong>Bali Home Immo</strong> &nbsp;·&nbsp; bali-home-immo.com &nbsp;·&nbsp; All listing data sourced from public marketplace channels &nbsp;·&nbsp; 2026</p>
 </footer>
 <script src="./js/slider.js"></script>
+<script>
+   function openModal() {
+    document.getElementById('pdfModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('pdfModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+
+  function downloadReport() {
+    const link = document.createElement('a');
+    link.href = './assets/report.html';
+    link.download = 'Technical_Assessment_Report.html';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    openModal();
+    
+    const modal = document.getElementById('pdfModal');
+    modal.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+  });
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  });
+</script>
  
 </body>
 </html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technical Assessment Report</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Georgia', serif;
+      background: #f5f5f5;
+      padding: 40px 20px;
+      line-height: 1.8;
+      color: #333;
+    }
+    
+    .report-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 60px 50px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .report-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .report-title h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    
+    .report-title .subtitle {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 3px;
+    }
+    
+    .report-meta {
+      border-top: 3px solid #1a1a1a;
+      border-bottom: 3px solid #1a1a1a;
+      padding: 20px 0;
+      margin-bottom: 40px;
+      font-size: 13px;
+    }
+    
+    .report-meta-row {
+      display: flex;
+      margin-bottom: 8px;
+    }
+    
+    .report-meta-row label {
+      width: 140px;
+      font-weight: 600;
+    }
+    
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-top: 35px;
+      margin-bottom: 15px;
+      color: #1a1a1a;
+    }
+    
+    h3 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 25px;
+      margin-bottom: 10px;
+      color: #1a1a1a;
+      border-bottom: 2px solid #b89552;
+      padding-bottom: 8px;
+    }
+    
+    p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    
+    ul, ol {
+      margin-left: 30px;
+      margin-bottom: 15px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+    }
+    
+    strong {
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    
+    .code-block {
+      background: #f9f9f9;
+      border-left: 4px solid #b89552;
+      padding: 15px;
+      margin: 15px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      overflow-x: auto;
+      color: #333;
+    }
+    
+    .property-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+    }
+    
+    .property-table th {
+      background: #b89552;
+      color: white;
+      padding: 10px;
+      text-align: left;
+      font-weight: 600;
+    }
+    
+    .property-table td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .property-table tr:nth-child(odd) {
+      background: #fafafa;
+    }
+    
+    .property-table tr:hover {
+      background: #f0f0f0;
+    }
+    
+    .property-section {
+      page-break-inside: avoid;
+      margin-bottom: 30px;
+      border: 1px solid #ddd;
+      padding: 20px;
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+  <div class="report-container">
+    <div class="report-title">
+      <h1>TECHNICAL ASSESSMENT REPORT</h1>
+      <div class="subtitle">Automated Property Data Integration & Listing Simulation</div>
+    </div>
+    
+    <div class="report-meta">
+      <div class="report-meta-row">
+        <label>Target Company</label>
+        <span>: Bali Home Immo (bali-home-immo.com)</span>
+      </div>
+      <div class="report-meta-row">
+        <label>Position</label>
+        <span>: Web Developer</span>
+      </div>
+      <div class="report-meta-row">
+        <label>Prepared by</label>
+        <span>: Yonatan Sinaga</span>
+      </div>
+      <div class="report-meta-row">
+        <label>Date</label>
+        <span>: 2026</span>
+      </div>
+    </div>
+
+    <h2>1. INTRODUCTION & TECHNICAL APPROACH</h2>
+    <p>This report is submitted as part of the Web Developer recruitment selection at Bali Home Immo. In response to the property listing simulation task, I approached this challenge through a full-stack developer lens, combining automated data aggregation with an interactive frontend demonstration. The deliverables for this assessment include this PDF report documenting the data collection methodology, structured property listings, and backend JSON data mappings, as well as a fully functional, responsive HTML demo page built with vanilla HTML, CSS, and JavaScript.</p>
+    
+    <p>The demo page features image sliders, property cards, and inline JSON code blocks that mirror the Bali Home Immo visual identity. Rather than relying on manual copy-pasting, the property data presented here is simulated as the output of an automated parsing pipeline using Python or Node.js, which extracts raw listings from public marketplace channels, normalizes the fields, and outputs database-ready JSON objects ready for direct CMS ingestion.</p>
+
+    <h2>2. DATABASE SCHEMA & DATA STRUCTURE (JSON READY)</h2>
+    <p>To ensure seamless integration with the bali-home-immo.com backend, every property record follows a consistent schema. This is the same schema rendered in the interactive demo page:</p>
+    
+    <div class="code-block">{
+  "property_id": "BHI-UNIQUE-ID",
+  "title": "Full Property Title String",
+  "location": {
+    "area": "Detailed Area Name",
+    "regency": "Badung / Tabanan"
+  },
+  "price": {
+    "idr": 0,
+    "usd": 0,
+    "type": "Freehold | Leasehold",
+    "duration_years": 0,
+    "negotiable": true
+  },
+  "specifications": {
+    "bedrooms": 0,
+    "bathrooms": 0,
+    "land_m2": 0,
+    "building_m2": 0,
+    "pool": true,
+    "furnished": "Full | Semi | Unfurnished"
+  },
+  "legality": {
+    "certificate": "SHM | SHB | Leasehold",
+    "additional": "SLF | IMB | In Process"
+  },
+  "media": {
+    "images_cdn": ["url_1.webp", "url_2.webp", "url_3.webp"]
+  }
+}</div>
+
+    <h2>3. DATA INTEGRATION RESULTS: 5 PREMIUM VILLAS</h2>
+    <p>The following 5 properties are sorted by price (descending) and match exactly with the interactive HTML demo page.</p>
+
+    <!-- Property 1 -->
+    <div class="property-section">
+      <h3>Property 1: Premium Oceanfront Villa - Balian Beach, Tabanan</h3>
+      <table class="property-table">
+        <tr>
+          <td><strong>System Property ID</strong></td>
+          <td>BHI-TABANAN-001</td>
+        </tr>
+        <tr>
+          <td><strong>Property Title</strong></td>
+          <td>Premium Luxury Oceanfront Villa</td>
+        </tr>
+        <tr>
+          <td><strong>Location</strong></td>
+          <td>Balian Beach, Tabanan, Bali</td>
+        </tr>
+        <tr>
+          <td><strong>Legality/Status</strong></td>
+          <td>Freehold | SHM</td>
+        </tr>
+        <tr>
+          <td><strong>Selling Price</strong></td>
+          <td>IDR 14,500,000,000</td>
+        </tr>
+        <tr>
+          <td><strong>Bedrooms/Bathrooms</strong></td>
+          <td>3 BR / 3 BA</td>
+        </tr>
+        <tr>
+          <td><strong>Building Size</strong></td>
+          <td>356 m²</td>
+        </tr>
+        <tr>
+          <td><strong>Key Features</strong></td>
+          <td>Infinity Pool with panoramic ocean view, DDAP Architect design (2021), 50 m to surf spot, 49 km from Ngurah Rai Airport, Fully Furnished, TV, Wi-Fi, Private Parking</td>
+        </tr>
+      </table>
+      <p><strong>Backend JSON Mapping:</strong></p>
+      <div class="code-block">{
+  "property_id": "BHI-TABANAN-001",
+  "price": { "idr": 14500000000, "type": "Freehold" },
+  "specs": { "beds": 3, "pool": true, "build_m2": 356 }
+}</div>
+    </div>
+
+    <!-- Property 2 -->
+    <div class="property-section">
+      <h3>Property 2: Gated Ricefield View Villa - Seminyak, Badung</h3>
+      <table class="property-table">
+        <tr>
+          <td><strong>System Property ID</strong></td>
+          <td>BHI-SEMINYAK-004</td>
+        </tr>
+        <tr>
+          <td><strong>Property Title</strong></td>
+          <td>Gated Ricefield View Villa</td>
+        </tr>
+        <tr>
+          <td><strong>Location</strong></td>
+          <td>Seminyak, Badung, Bali</td>
+        </tr>
+        <tr>
+          <td><strong>Legality/Status</strong></td>
+          <td>Freehold | Hak Milik</td>
+        </tr>
+        <tr>
+          <td><strong>Selling Price</strong></td>
+          <td>IDR 3,900,000,000 (Negotiable)</td>
+        </tr>
+        <tr>
+          <td><strong>Bedrooms/Bathrooms</strong></td>
+          <td>2 BR / 2 BA</td>
+        </tr>
+        <tr>
+          <td><strong>Building Size</strong></td>
+          <td>112 m² / 100 m²</td>
+        </tr>
+        <tr>
+          <td><strong>Key Features</strong></td>
+          <td>North-facing, dual-side ricefield views, gated community with 24-hour security, 6-meter access road, Wi-Fi included, Fully Furnished</td>
+        </tr>
+      </table>
+      <div class="code-block">{
+  "property_id": "BHI-SEMINYAK-004",
+  "price": { "idr": 3900000000, "nego": true },
+  "specs": { "beds": 2, "gated": true, "view": "ricefield" }
+}</div>
+    </div>
+
+    <!-- Property 3 -->
+    <div class="property-section">
+      <h3>Property 3: Mediterranean Elegance Exclusive Villa – Ungasan, South Kuta</h3>
+      <table class="property-table">
+        <tr>
+          <td><strong>System Property ID</strong></td>
+          <td>BHI-UNGASAN-002</td>
+        </tr>
+        <tr>
+          <td><strong>Property Title</strong></td>
+          <td>Mediterranean Elegance Exclusive Villa</td>
+        </tr>
+        <tr>
+          <td><strong>Location</strong></td>
+          <td>Ungasan, South Kuta, Badung, Bali</td>
+        </tr>
+        <tr>
+          <td><strong>Legality/Status</strong></td>
+          <td>Leasehold | 25 Years</td>
+        </tr>
+        <tr>
+          <td><strong>Selling Price</strong></td>
+          <td>IDR 3,350,000,000 (≈ USD 210,000)</td>
+        </tr>
+        <tr>
+          <td><strong>Bedrooms/Bathrooms</strong></td>
+          <td>3 BR / 3 Ensuite BA</td>
+        </tr>
+        <tr>
+          <td><strong>Building Size</strong></td>
+          <td>140 m² / 120 m²</td>
+        </tr>
+        <tr>
+          <td><strong>Key Features</strong></td>
+          <td>Private Pool, 100 m to Jimbaran-Uluwatu main road, 10 mins to GWK, Balangan, Dreamland & Bingin Beach, 5500 VA electricity, PDAM water, Fully Furnished</td>
+        </tr>
+      </table>
+      <div class="code-block">{
+  "property_id": "BHI-UNGASAN-002",
+  "price": { "idr": 3350000000, "usd": 210000 },
+  "lease": { "years": 25, "renewable": true }
+}</div>
+    </div>
+
+    <!-- Property 4 -->
+    <div class="property-section">
+      <h3>Property 4: New Santorini Style Villa – Nusa Dua Elite Cluster</h3>
+      <table class="property-table">
+        <tr>
+          <td><strong>System Property ID</strong></td>
+          <td>BHI-NUSADUA-005</td>
+        </tr>
+        <tr>
+          <td><strong>Property Title</strong></td>
+          <td>New Santorini Style Villa — Elite Cluster</td>
+        </tr>
+        <tr>
+          <td><strong>Location</strong></td>
+          <td>Nusa Dua, Elite Cluster, Badung, Bali</td>
+        </tr>
+        <tr>
+          <td><strong>Legality/Status</strong></td>
+          <td>Freehold | SHM + SLF</td>
+        </tr>
+        <tr>
+          <td><strong>Selling Price</strong></td>
+          <td>IDR 2,300,000,000 (Negotiable)</td>
+        </tr>
+        <tr>
+          <td><strong>Bedrooms/Bathrooms</strong></td>
+          <td>2 BR / 2 BA</td>
+        </tr>
+        <tr>
+          <td><strong>Building Size</strong></td>
+          <td>129 m² / 90 m²</td>
+        </tr>
+        <tr>
+          <td><strong>Key Features</strong></td>
+          <td>Mediterranean Santorini design, Private Pool, Elite gated cluster, Rental yield potential IDR 200M/year, SLF Certified, 10 mins to Gunung Payung Beach, 15 mins to Sundays Beach Club, 20 mins to GWK</td>
+        </tr>
+      </table>
+      <div class="code-block">{
+  "property_id": "BHI-NUSADUA-005",
+  "price": { "idr": 2300000000, "nego": true },
+  "rental_yield_idr_annual": 200000000
+}</div>
+    </div>
+
+    <!-- Property 5 -->
+    <div class="property-section">
+      <h3>Property 5: Brand New Santorini Style Villa – Melasti, Ungasan</h3>
+      <table class="property-table">
+        <tr>
+          <td><strong>System Property ID</strong></td>
+          <td>BHI-UNGASAN-006</td>
+        </tr>
+        <tr>
+          <td><strong>Property Title</strong></td>
+          <td>Brand New Villa — Santorini Style Melasti</td>
+        </tr>
+        <tr>
+          <td><strong>Location</strong></td>
+          <td>Melasti, Ungasan, Badung, Bali</td>
+        </tr>
+        <tr>
+          <td><strong>Legality/Status</strong></td>
+          <td>Freehold | SHM (SLF in process)</td>
+        </tr>
+        <tr>
+          <td><strong>Selling Price</strong></td>
+          <td>IDR 1,950,000,000 (Negotiable)</td>
+        </tr>
+        <tr>
+          <td><strong>Bedrooms/Bathrooms</strong></td>
+          <td>2 BR / 3 BA</td>
+        </tr>
+        <tr>
+          <td><strong>Building Size</strong></td>
+          <td>130 m² / 100 m²</td>
+        </tr>
+        <tr>
+          <td><strong>Key Features</strong></td>
+          <td>Brand new Santorini-style architecture, Swimming Pool, Modern Kitchen Set (Free), Garden & Balcony, Carport, 5500W electricity, PDAM water, 5m road access</td>
+        </tr>
+      </table>
+      <div class="code-block">{
+  "property_id": "BHI-UNGASAN-006",
+  "price": { "idr": 1950000000, "nego": true },
+  "specs": { "beds": 2, "baths": 3, "land_m2": 130, "build_m2": 100 }
+}</div>
+    </div>
+
+    <h2>4. INTERACTIVE DEMO & TECHNICAL HIGHLIGHTS</h2>
+    <p>In addition to this report, a fully functional interactive listing page (index.html) demonstrates vanilla HTML, CSS, and JavaScript implementation with no frameworks, ensuring maximum compatibility and fast load times. Each property card features a custom built image slider with navigation controls and dot indicators, while inline JSON code blocks bridge the gap between visual presentation and database structure. The responsive design adapts seamlessly from desktop to mobile viewports.</p>
+
+    <h2>5. CONCLUSION</h2>
+    <p>By delivering both a comprehensive data report and an interactive frontend prototype, this assessment demonstrates the capability to:</p>
+    <ul>
+      <li>Automate data collection using scripting pipelines</li>
+      <li>Structure property data into consistent database-ready JSON schemas</li>
+      <li>Build pixel-perfect responsive UI components that match the Bali Home Immo design language</li>
+      <li>Bridge the gap between raw data aggregation and polished frontend presentation</li>
+    </ul>
+    <p style="margin-top: 30px; border-top: 2px solid #b89552; padding-top: 20px;">This assessment demonstrates my excitement about bringing these skills to the Bali Home Immo engineering team, optimizing data workflows and enhancing the user experience on bali-home-immo.com.</p>
+  </div>
+</body>
+</html>
