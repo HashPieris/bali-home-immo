@@ -20,7 +20,7 @@
       <button class="modal-close" onclick="closeModal()">&times;</button>
     </div>
     <div class="modal-body">
-      <iframe id="pdfViewer" src="./assets/report.html" type="text/html"></iframe>
+      <iframe id="pdfViewer" src="./assets/images/Reportation_Yonatan Sinaga_Web Developer.pdf" type="application/pdf"></iframe>
     </div>
     <div class="modal-footer">
       <button class="btn-secondary" onclick="closeModal()">Close</button>
@@ -335,8 +335,8 @@
 
   function downloadReport() {
     const link = document.createElement('a');
-    link.href = './assets/report.html';
-    link.download = 'Technical_Assessment_Report.html';
+    link.href = './assets/images/Reportation_Yonatan Sinaga_Web Developer.pdf';
+    link.download = 'Reportation_Yonatan Sinaga_Web Developer.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
